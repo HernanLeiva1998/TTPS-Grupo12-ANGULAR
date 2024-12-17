@@ -1,0 +1,89 @@
+<div class="container-fluid vh-100">
+  <div class="row h-100">
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+      <div
+        class="bg-white p-5 rounded-5 text-secondary shadow"
+        style="width: 25rem"
+      >
+        <div class="text-center fs-1 fw-bold">Registrarse</div>
+        <form
+          [formGroup]="form"
+          novalidate
+          #f="ngForm"
+          (ngSubmit)="onRegister()"
+        >
+          <div class="form-group mt-4 mb-3">
+            <label for="email" class="form-label" appRequiredMark>eMail</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Ingrese su email..."
+              name="email"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group mt-3 mb-3">
+            <label for="password" class="form-label" appRequiredMark
+              >Contraseña</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Ingrese su contraseña..."
+              name="password"
+              formControlName="password"
+              required
+            />
+          </div>
+          <div class="form-group mt-3 mb-3">
+            <label for="repeatedPassword" class="form-label" appRequiredMark
+              >Confirmar contraseña</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="repeatedPassword"
+              placeholder="Vuelva a ingresar su contraseña..."
+              name="repeatedPassword"
+              formControlName="repeatedPassword"
+              required
+            />
+          </div>
+          <div class="form-group mt-3 mb-3">
+            <label for="firstname" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstname"
+              placeholder="Ingrese su nombre..."
+              name="firstname"
+              formControlName="firstname"
+            />
+          </div>
+          <div class="form-group mt-3 mb-3">
+            <label for="lastname" class="form-label">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              placeholder="Ingrese su apellido..."
+              name="lastname"
+              formControlName="lastname"
+            />
+          </div>
+          <app-alert></app-alert>
+          <div class="pt-3 mb-4">
+            <div class="border-bottom text-center" style="height: 0.9rem"></div>
+          </div>
+          <app-submit-button
+            [isFormInvalid]="!f.valid"
+            [text]="'Registrarse'"
+            [isLoading]="submitButtonLoading"
+          ></app-submit-button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

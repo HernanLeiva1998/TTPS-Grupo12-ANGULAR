@@ -1,0 +1,38 @@
+<div class="container py-5">
+  <h3 class="display-6">
+    <small> Comidas y Bebidas </small>
+    <div style="float: right">
+      <button class="btn btn-info" (click)="goToNewConsumable()">
+        Crear consumible
+      </button>
+    </div>
+  </h3>
+  <br />
+
+  <!--SPINNER DE CARGA-->
+  <app-generic-spinner [isLoading]="isLoading"></app-generic-spinner>
+
+  <!--SECCION PAGINADO-->
+  <div *ngIf="!isLoading">
+    <div class="d-flex flex-wrap justify-content-between ml-2">
+      <div *ngFor="let consumible of consumables" class="card mb-3 p-3" style="width: 20rem;">
+        <h5 class="card-title">{{ consumible.name }}</h5>
+        <p class="card-text">{{ consumible.description }}</p>
+      </div>
+
+      <!-- Card de aviso si la lista está vacía -->
+      <div class="card mb-3 p-3" *ngIf="isListEmpty">
+        <h5 class="card-title">Sin resultados</h5>
+        <p class="card-text">No hay comidas ni bebidas disponibles.</p>
+      </div>
+    </div>
+
+    <!-- Componente de paginacion -->
+    <app-pagination
+      *ngIf="!isListEmpty"
+      [page]="page"
+      (pageChange)="fetchPageData($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

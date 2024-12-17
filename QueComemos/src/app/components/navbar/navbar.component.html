@@ -1,1 +1,34 @@
-<p>navbar works!</p>
+<nav class="navbar bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">¿Que comemos?</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">
+            <span class="text-wrap">Iniciar sesion</span>
+          </a>
+          <a class="nav-link" routerLink="/register" routerLinkActive="active">
+            <span class="text-wrap">Registrarse</span>
+          </a>
+          <a class="nav-link" routerLink="/consumable" routerLinkActive="active">
+            <span class="text-wrap">Comidas</span>
+          </a>
+          <a class="nav-link" routerLink="/menu" routerLinkActive="active">
+            <span class="text-wrap">Menus</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
