@@ -1,19 +1,54 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_BASE_URL } from '../../constants/api_urls';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Page } from '../../models/page';
+import { Consumable } from '../../models/consumable';
+import { JsonResponse } from '../../models/json-response';
+import { handleResponse } from '../service-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConsumableService {
+  controllerName: string = 'consumable';
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  create(consumable: Consumable): Observable<Consumable> {
+    return this.http
+      .post<JsonResponse<Consumable>>(
+        API_BASE_URL + this.controllerName + '/',
+        consumable
+      )
+      .pipe(map(handleResponse));
+  }
 
-  // Método para obtener los consumibles desde la API
-  getConsumables(): Observable<any> {
-    return this.http.get<any>(`${API_BASE_URL}/consumables`);
+  update(consumable: Consumable): Observable<Consumable> {
+    return this.http
+      .put<JsonResponse<Consumable>>(
+        API_BASE_URL + this.controllerName + '/update',
+        consumable
+      )
+      .pipe(map(handleResponse));
+  }
+
+  getConsumable(id: number): Observable<Consumable> {
+    return this.http
+      .get<JsonResponse<Consumable>>(
+        API_BASE_URL + this.controllerName + '/' + id
+      )
+      .pipe(map(handleResponse));
+  }
+
+  getPage(page: number = 0, size: number = 10): Observable<Page<Consumable>> {
+    let params = new HttpParams().set('page', page).set('size', size);
+
+    return this.http
+      .get<JsonResponse<Page<Consumable>>>(
+        API_BASE_URL + this.controllerName + '/page',
+        { params }
+      )
+      .pipe(map(handleResponse));
   }
 }
-

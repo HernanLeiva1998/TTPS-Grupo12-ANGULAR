@@ -10,13 +10,13 @@ import { handleResponse } from '../service-utils';
   providedIn: 'root'
 })
 export class UserService {
-  controllerName: string = '/user';
+  controllerName: string = 'user';
 
   constructor(private http: HttpClient) { }
 
   // Método para obtener los consumibles desde la API
   getUsers(): Observable<any> {
-    return this.http.get<any>(`${API_BASE_URL}/users`);
+    return this.http.get<any>(`${API_BASE_URL}users`);
   }
 
   create(user: User): Observable<User> {

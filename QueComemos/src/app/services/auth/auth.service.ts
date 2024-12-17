@@ -10,7 +10,7 @@ import { Authorization } from '../../models/authorization';
   providedIn: 'root',
 })
 export class AuthService {
-  controllerName: string = '/auth';
+  controllerName: string = 'auth';
 
   constructor(private http: HttpClient) {}
 

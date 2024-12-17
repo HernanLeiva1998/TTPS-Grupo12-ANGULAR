@@ -16,21 +16,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'register', component: RegisterComponent },
-  {
-    path: 'consumable',
-    component: ListConsumableComponent,
-    children: [
-      { path: 'create', component: NewConsumableComponent },
-      { path: 'edit/:id', component: EditConsumableComponent },
-    ],
-  },
-  {
-    path: 'menu',
-    component: ListMenuComponent,
-    children: [
-      { path: 'create', component: NewMenuComponent },
-      { path: 'edit/:id', component: EditMenuComponent },
-    ],
-  },
+  { path: 'consumable', component: ListConsumableComponent },
+  { path: 'consumable/create', component: NewConsumableComponent },
+  { path: 'consumable/edit/:id', component: EditConsumableComponent },
+  { path: 'menu', component: ListMenuComponent },
+  { path: 'menu/create', component: NewConsumableComponent },
+  { path: 'menu/edit/:id', component: EditConsumableComponent },
   //{ path: '**', component: PageNotFoundComponent }, <------------ ISSUE-40233 PARA AGUSTIN!!!!
 ];
