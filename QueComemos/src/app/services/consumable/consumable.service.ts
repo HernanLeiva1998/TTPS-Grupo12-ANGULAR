@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_BASE_URL } from '../../constants/api_urls';
-import { map, Observable } from 'rxjs';
+import { Cons, map, Observable } from 'rxjs';
 import { Page } from '../../models/page';
 import { Consumable } from '../../models/consumable';
 import { JsonResponse } from '../../models/json-response';
@@ -33,6 +33,14 @@ export class ConsumableService {
       .pipe(map(handleResponse));
   }
 
+  delete(id: number): Observable<Consumable> {
+    return this.http
+      .delete<JsonResponse<Consumable>>(
+        API_BASE_URL + this.controllerName + '/delete/' + id
+      )
+      .pipe(map(handleResponse));
+  }
+
   getConsumable(id: number): Observable<Consumable> {
     return this.http
       .get<JsonResponse<Consumable>>(
@@ -51,4 +59,13 @@ export class ConsumableService {
       )
       .pipe(map(handleResponse));
   }
+
+  getAll(): Observable<Consumable[]>{
+    return this.http
+      .get<JsonResponse<Page<Consumable>>>(
+        API_BASE_URL + this.controllerName + '/',
+      )
+      .pipe(map(handleResponse));
+  }
+
 }

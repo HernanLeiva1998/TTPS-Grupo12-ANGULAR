@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'consumable/create', component: NewConsumableComponent },
   { path: 'consumable/edit/:id', component: EditConsumableComponent },
   { path: 'menu', component: ListMenuComponent },
-  { path: 'menu/create', component: NewConsumableComponent },
-  { path: 'menu/edit/:id', component: EditConsumableComponent },
+  { path: 'menu/create', component: NewMenuComponent },
+  { path: 'menu/edit/:id', component: EditMenuComponent },
   //{ path: '**', component: PageNotFoundComponent }, <------------ ISSUE-40233 PARA AGUSTIN!!!!
 ];

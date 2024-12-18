@@ -5,13 +5,13 @@ import { ConsumableService } from '../../../services/consumable/consumable.servi
 import { AlertService } from '../../../services/alert/alert.service';
 import { PageComponent } from '../../../components/pagination/page/page.component';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-consumable',
   standalone: true,
-  imports: [CommonModule, GenericSpinnerComponent, PaginationComponent],
+  imports: [CommonModule, GenericSpinnerComponent, PaginationComponent, RouterModule],
   templateUrl: './list-consumable.component.html',
   styleUrl: './list-consumable.component.css',
 })
@@ -51,4 +51,20 @@ export class ListConsumableComponent
   public goToNewConsumable() {
     this.router.navigate(['consumable/create']);
   }
+
+  public editConsumable(id?: number) {
+    this.router.navigate(['consumable/edit', id!!]);
+  }
+
+  public deleteConsumable(id?: number){
+    this.consumableService.delete(id ?? 0).subscribe({
+      next: () => {
+        this.fetchPageData(this.page.page);
+      },
+      error: (error) => {
+        this.alertService.error(error.message);
+      },
+    });
+  }
+
 }

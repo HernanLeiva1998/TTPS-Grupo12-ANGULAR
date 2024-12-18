@@ -30,6 +30,22 @@ export class MenuService {
       .pipe(map(handleResponse));
   }
 
+    delete(id: number): Observable<Menu> {
+      return this.http
+        .delete<JsonResponse<Menu>>(
+          API_BASE_URL + this.controllerName + '/delete/' + id
+        )
+        .pipe(map(handleResponse));
+    }
+
+      getMenu(id: number): Observable<Menu> {
+        return this.http
+          .get<JsonResponse<Menu>>(
+            API_BASE_URL + this.controllerName + '/' + id
+          )
+          .pipe(map(handleResponse));
+      }
+
   getPage(page: number = 0, size: number = 10): Observable<Page<Menu>> {
     let params = new HttpParams().set('page', page).set('size', size);
 
