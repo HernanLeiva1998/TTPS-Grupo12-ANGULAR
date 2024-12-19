@@ -10,6 +10,7 @@ import { EditConsumableComponent } from './pages/consumable/edit-consumable/edit
 import { ListMenuComponent } from './pages/menu/list-menu/list-menu.component';
 import { NewMenuComponent } from './pages/menu/new-menu/new-menu.component';
 import { EditMenuComponent } from './pages/menu/edit-menu/edit-menu.component';
+import { UserGuard } from './guards/user.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent }, // Ruta para la página principal
@@ -17,10 +18,26 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'consumable', component: ListConsumableComponent },
-  { path: 'consumable/create', component: NewConsumableComponent },
-  { path: 'consumable/edit/:id', component: EditConsumableComponent },
+  {
+    path: 'consumable/create',
+    component: NewConsumableComponent,
+    canActivate: [UserGuard],
+  },
+  {
+    path: 'consumable/edit/:id',
+    component: EditConsumableComponent,
+    canActivate: [UserGuard],
+  },
   { path: 'menu', component: ListMenuComponent },
-  { path: 'menu/create', component: NewMenuComponent },
-  { path: 'menu/edit/:id', component: EditMenuComponent },
-  //{ path: '**', component: PageNotFoundComponent }, <------------ ISSUE-40233 PARA AGUSTIN!!!!
+  {
+    path: 'menu/create',
+    component: NewMenuComponent,
+    canActivate: [UserGuard],
+  },
+  {
+    path: 'menu/edit/:id',
+    component: EditMenuComponent,
+    canActivate: [UserGuard],
+  },
+  { path: '**', component: PageNotFoundComponent }, //<<--- ISSUE-545034 PARA HERNAN SUPERVISADO POR AGUSTIN
 ];

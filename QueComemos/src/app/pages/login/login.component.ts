@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(user).subscribe({
       next: (data) => {
         this.sessionService.setRole(data?.json.role!!);
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       },
       error: (error) => {
         this.alertService.error(error.message);
