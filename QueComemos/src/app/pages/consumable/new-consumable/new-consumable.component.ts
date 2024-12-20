@@ -74,6 +74,10 @@ export class NewConsumableComponent implements OnInit {
     });
   }
 
+  onlyShowNone() {
+    return this.form.value.category == 'DRINK'
+  }
+
   cancel() {
     this.location.back(); // <-- go back to previous location on cancel
   }

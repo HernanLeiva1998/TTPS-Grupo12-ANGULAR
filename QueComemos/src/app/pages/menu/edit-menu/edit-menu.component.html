@@ -1,164 +1,109 @@
 <div class="container col-md-12">
-    <div class="py-3">
-      <h3 class="display-6">
-        <small>Editar menu</small>
-      </h3>
-      <small class="text-muted" appRequiredMark>Campos requeridos</small>
-    </div>
-    <div class="row">
-      <form
-        [formGroup]="form"
-        (ngSubmit)="update()"
-        novalidate
-        #f="ngForm"
-        class="row g-3"
-      >
-        <div class="form-group col-md-12">
-          <label for="name" class="form-label" appRequiredMark>Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            formControlName="name"
-            required
-          />
-        </div>
-        <label for="price" class="form-label" appRequiredMark>Precio</label>
-        <div class="input-group col-md-6">
-          <span class="input-group-text">$</span>
-          <input
-            type="number"
-            class="form-control"
-            id="price"
-            name="price"
-            formControlName="price"
-            required
-          />
-          <span class="input-group-text">.00</span>
-        </div>
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="foodType"
-            aria-label="Floating label select foodType"
-            formControlName="foodType"
-          >
-            <option value="VEGETARIAN">Vegetariano</option>
-            <option value="NON_VEGETARIAN">No vegetariano</option>
-            <option value="NONE">Ninguno</option>
-          </select>
-          <label for="foodType" appRequiredMark>Tipo de comida</label>
-        </div>
-        <!-- SELECT ENTRADA -->
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="appetizer"
-            aria-label="Floating label select foodType"
-            formControlName="appetizer"
-          >
-            <option value="" disabled selected>-- Entrada --</option>
-            <ng-container *ngFor="let consumable of consumables">
-              <option
-                *ngIf="consumable.category === 'APPETIZER' && consumable.foodType === foodType"
-                [ngValue]="consumable"
-              >
-                {{ consumable.name }}
-              </option>
-            </ng-container>
-          </select>
-          <label for="appetizer" appRequiredMark>Entrada</label>
-        </div>        
+  <div class="py-3">
+    <h3 class="display-6">
+      <small>Editar menu</small>
+    </h3>
+    <small class="text-muted" appRequiredMark>Campos requeridos</small>
+  </div>
+  <div class="row">
+    <form [formGroup]="form" (ngSubmit)="update()" novalidate #f="ngForm" class="row g-3">
+      <div class="form-group col-md-12">
+        <label for="name" class="form-label" appRequiredMark>Nombre</label>
+        <input type="text" class="form-control" id="name" name="name" formControlName="name" required />
+      </div>
+      <label for="price" class="form-label" appRequiredMark>Precio</label>
+      <div class="input-group col-md-6">
+        <span class="input-group-text">$</span>
+        <input type="number" class="form-control" id="price" name="price" formControlName="price" required />
+        <span class="input-group-text">.00</span>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" id="foodType" aria-label="Floating label select foodType"
+          formControlName="foodType">
+          <option value="VEGETARIAN">Vegetariano</option>
+          <option value="NON_VEGETARIAN">No vegetariano</option>
+          <option value="NONE">Ninguno</option>
+        </select>
+        <label for="foodType" appRequiredMark>Tipo de comida</label>
+      </div>
+      <!-- SELECT ENTRADA -->
+      <div class="form-floating">
+        <select class="form-select" id="appetizer" aria-label="Floating label select foodType"
+          formControlName="appetizer">
+          <option value="" disabled selected>-- Entrada --</option>
+          <ng-container *ngFor="let consumable of consumables">
+            <option *ngIf="consumable.category === 'APPETIZER' && consumable.foodType === foodType"
+              [ngValue]="consumable">
+              {{ consumable.name }}
+            </option>
+          </ng-container>
+        </select>
+        <label for="appetizer" appRequiredMark>Entrada</label>
+      </div>
 
-        <!-- SELECT PLATO PRINCIPAL -->
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="mainCourse"
-            aria-label="Floating label select foodType"
-            formControlName="mainCourse"
-          >
+      <!-- SELECT PLATO PRINCIPAL -->
+      <div class="form-floating">
+        <select class="form-select" id="mainCourse" aria-label="Floating label select foodType"
+          formControlName="mainCourse">
           <option value="" [disabled]="true" selected>
             <label>-- Plato principal --</label>
           </option>
           <ng-container *ngFor="let consumable of consumables">
-            <option
-              *ngIf="consumable.category === 'MAIN_COURSE' && consumable.foodType === foodType"
-              [ngValue]="consumable"
-            >
+            <option *ngIf="consumable.category === 'MAIN_COURSE' && consumable.foodType === foodType"
+              [ngValue]="consumable">
               {{ consumable.name }}
             </option>
           </ng-container>
-          </select>
-          <label for="mainCourse" appRequiredMark>Plato Principal</label>
-        </div>
+        </select>
+        <label for="mainCourse" appRequiredMark>Plato Principal</label>
+      </div>
 
-        <!-- SELECT POSTRE -->
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="dessert"
-            aria-label="Floating label select foodType"
-            formControlName="dessert"
-          >
+      <!-- SELECT POSTRE -->
+      <div class="form-floating">
+        <select class="form-select" id="dessert" aria-label="Floating label select foodType" formControlName="dessert">
           <option value="" [disabled]="true" selected>
             <label>-- Postre --</label>
           </option>
           <ng-container *ngFor="let consumable of consumables">
-            <option
-              *ngIf="consumable.category === 'DESSERT' && consumable.foodType === foodType"
-              [ngValue]="consumable"
-            >
+            <option *ngIf="consumable.category === 'DESSERT' && consumable.foodType === foodType"
+              [ngValue]="consumable">
               {{ consumable.name }}
             </option>
           </ng-container>
-          </select>
-          <label for="dessert" appRequiredMark>Postre</label>
-        </div>
+        </select>
+        <label for="dessert" appRequiredMark>Postre</label>
+      </div>
 
-        <!-- SELECT BEBIDA -->
-        <div class="form-floating">
-          <select
-            class="form-select"
-            id="drink"
-            aria-label="Floating label select foodType"
-            formControlName="drink"
-          >
+      <!-- SELECT BEBIDA -->
+      <div class="form-floating">
+        <select class="form-select" id="drink" aria-label="Floating label select foodType" formControlName="drink">
           <option value="" [disabled]="true" selected>
             <label>-- Bebida --</label>
           </option>
           <ng-container *ngFor="let consumable of consumables">
-            <option
-              *ngIf="consumable.category === 'DRINK' && consumable.foodType === foodType"
-              [ngValue]="consumable"
-            >
+            <option *ngIf="consumable.category === 'DRINK' && consumable.foodType === 'NONE'" [ngValue]="consumable">
               {{ consumable.name }}
             </option>
           </ng-container>
-          </select>
-          <label for="drink" appRequiredMark>Bebida</label>
-        </div>
+        </select>
+        <label for="drink" appRequiredMark>Bebida</label>
+      </div>
 
-        <!-- NO MAS SELECTS -->
-        <app-alert></app-alert>
-        <div class="py-3">
-          <div class="border-bottom text-center" style="height: 0.9rem"></div>
-        </div>
-        <div class="card-footer">
-          <div class="d-flex justify-content-between ms-auto">
-            <div>
-              <a class="btn btn-secondary" (click)="cancel()">Cancelar</a>
-            </div>
-            <!-- The button has a click handler, it will be disabled if the form is not valid -->
-            <app-submit-button
-              [isFormInvalid]="form.invalid"
-              [text]="'Confirmar'"
-              [isLoading]="submitButtonLoading"
-            ></app-submit-button>
+      <!-- NO MAS SELECTS -->
+      <app-alert></app-alert>
+      <div class="py-3">
+        <div class="border-bottom text-center" style="height: 0.9rem"></div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-between ms-auto">
+          <div>
+            <a class="btn btn-secondary" (click)="cancel()">Cancelar</a>
           </div>
+          <!-- The button has a click handler, it will be disabled if the form is not valid -->
+          <app-submit-button [isFormInvalid]="form.invalid" [text]="'Confirmar'"
+            [isLoading]="submitButtonLoading"></app-submit-button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  
+</div>
