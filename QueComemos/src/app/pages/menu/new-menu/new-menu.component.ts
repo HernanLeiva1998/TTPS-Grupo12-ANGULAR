@@ -104,4 +104,13 @@ export class NewMenuComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
+  /* 
+  modifyContent(Consumable c, String type){
+    if (c.category === type){
+    return true
+    }
+    return true;
+  }
+    */
+
 }

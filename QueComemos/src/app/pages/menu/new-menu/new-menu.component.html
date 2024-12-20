@@ -22,7 +22,6 @@
           formControlName="foodType">
           <option value="VEGETARIAN">Vegetariano</option>
           <option value="NON_VEGETARIAN">No vegetariano</option>
-          <option value="NONE">Ninguno</option>
         </select>
         <label for="foodType" appRequiredMark>Tipo de menu</label>
       </div>
@@ -33,7 +32,7 @@
           formControlName="appetizer">
           <option value="" disabled selected>-- Entrada --</option>
           <ng-container *ngFor="let consumable of consumables">
-            <option *ngIf="consumable.category === 'APPETIZER' && consumable.foodType === foodType"
+            <option *ngIf="consumable.category === 'APPETIZER' && (foodType === 'VEGETARIAN' ? consumable.foodType === foodType : true)"
               [ngValue]="consumable">
               {{ consumable.name }}
             </option>
@@ -50,7 +49,7 @@
             <label>-- Plato principal --</label>
           </option>
           <ng-container *ngFor="let consumable of consumables">
-            <option *ngIf="consumable.category === 'MAIN_COURSE' && consumable.foodType === foodType"
+            <option *ngIf="consumable.category === 'MAIN_COURSE' && (foodType === 'VEGETARIAN' ? consumable.foodType === foodType : true)"
               [ngValue]="consumable">
               {{ consumable.name }}
             </option>
@@ -66,7 +65,7 @@
             <label>-- Postre --</label>
           </option>
           <ng-container *ngFor="let consumable of consumables">
-            <option *ngIf="consumable.category === 'DESSERT' && consumable.foodType === foodType"
+            <option *ngIf="consumable.category === 'DESSERT' && (foodType === 'VEGETARIAN' ? consumable.foodType === foodType : true)"
               [ngValue]="consumable">
               {{ consumable.name }}
             </option>

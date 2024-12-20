@@ -83,15 +83,13 @@ export class EditMenuComponent implements OnInit {
     this.menuService.getMenu(this.idMenu).subscribe({
       next: (data: Menu) => {
         this.menu = data;
-        this.form.patchValue({
-          name: data.name,
-          price: data.price,
-          foodType: data.type,
-          appetizer: data.consumables?.find(c => c.category === 'APPETIZER'),
-          mainCourse: data.consumables?.find(c => c.category === 'MAIN_COURSE'),
-          dessert: data.consumables?.find(c => c.category === 'DESSERT'),
-          drink: data.consumables?.find(c => c.category === 'DRINK'),
-        });
+        this.form.get('name')?.setValue(data.name);
+        this.form.get('foodType')?.setValue(data.type);
+        this.form.get('price')?.setValue(data.price);
+        this.form.get('appetizer')?.setValue(data.consumables?.find(c => c.category === 'APPETIZER'));
+        this.form.get('mainCourse')?.setValue(data.consumables?.find(c => c.category === 'MAIN_COURSE'));
+        this.form.get('dessert')?.setValue(data.consumables?.find(c => c.category === 'DESSERT'));
+        this.form.get('drink')?.setValue(data.consumables?.find(c => c.category === 'DRINK'));
       },
       error: (error) => {
         this.alertService.error(error.message);
@@ -110,6 +108,7 @@ export class EditMenuComponent implements OnInit {
       this.form.value.dessert,
       this.form.value.drink,
     ],
+    this.menu.consumables = this.consumables;
 
     this.menuService.update(this.menu).subscribe({
       next: () => {
