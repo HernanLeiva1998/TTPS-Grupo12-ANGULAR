@@ -33,7 +33,7 @@ import { Consumable } from '../../../models/consumable';
 })
 export class NewMenuComponent implements OnInit {
   form: FormGroup;
-  consumables : Consumable [];
+  consumables: Consumable[];
   submitButtonLoading: Boolean;
   foodType: string = 'NONE';
 
@@ -54,7 +54,6 @@ export class NewMenuComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      category: ['', [Validators.required]],
       foodType: ['', [Validators.required]],
       appetizer: ['', [Validators.required]],
       mainCourse: ['', [Validators.required]],
@@ -84,7 +83,7 @@ export class NewMenuComponent implements OnInit {
     });
   }
 
-  getAll(){
+  getAll() {
     this.consumableService.getAll().subscribe({
       next: (data: Consumable[]) => {
         this.consumables = data;
