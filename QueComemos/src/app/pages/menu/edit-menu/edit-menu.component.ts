@@ -62,6 +62,12 @@ export class EditMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchMenu();
+    this.initializeForm();
+    this.getAll();
+    this.onFoodTypeChange();
+  }
+
+  initializeForm(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       price: ['', [Validators.required]],
@@ -71,18 +77,21 @@ export class EditMenuComponent implements OnInit {
       dessert: ['', [Validators.required]],
       drink: ['', [Validators.required]],
     });
-    this.getAll();
-    this.onFoodTypeChange();
   }
 
   fetchMenu(): void {
     this.menuService.getMenu(this.idMenu).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.form.get('name')?.setValue(data.name);
-        this.form.get('price')?.setValue(data.price);
-        this.form.get('foodType')?.setValue(data.type);
-        // this.form.get('appetizer')?.setValue(data.appetizer);
+      next: (data: Menu) => {
+        this.menu = data;
+        this.form.patchValue({
+          name: data.name,
+          price: data.price,
+          foodType: data.type,
+          appetizer: data.consumables?.find(c => c.category === 'APPETIZER'),
+          mainCourse: data.consumables?.find(c => c.category === 'MAIN_COURSE'),
+          dessert: data.consumables?.find(c => c.category === 'DESSERT'),
+          drink: data.consumables?.find(c => c.category === 'DRINK'),
+        });
       },
       error: (error) => {
         this.alertService.error(error.message);
@@ -95,7 +104,12 @@ export class EditMenuComponent implements OnInit {
     this.menu.name = this.form.value.name;
     this.menu.price = this.form.value.price;
     this.menu.type = this.form.value.foodType;
-    this.menu.consumables = this.consumables;
+    this.consumables = [
+      this.form.value.appetizer,
+      this.form.value.mainCourse,
+      this.form.value.dessert,
+      this.form.value.drink,
+    ],
 
     this.menuService.update(this.menu).subscribe({
       next: () => {
